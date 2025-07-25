@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权氏家族 | 写作专栏</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f9f7f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 导航栏样式 */
+        nav {
+            background-color: #8e2323;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #f8d7a3;
+        }
+        
+        /* 面包屑导航 */
+        .breadcrumb {
+            padding: 15px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #8e2323;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin: 30px 0;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4a76a;
+        }
+        
+        .page-header h1 {
+            font-size: 32px;
+            color: #8e2323;
+            margin-bottom: 10px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .page-header p {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 文章列表样式 */
+        .article-list {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .article-list h2 {
+            color: #8e2323;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .article-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .article-item:last-child {
+            border-bottom: none;
+        }
+        
+        .article-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .article-title a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .article-title a:hover {
+            color: #8e2323;
+        }
+        
+        .article-meta {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .article-excerpt {
+            margin-top: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .pagination a {
+            color: #8e2323;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+            border-radius: 4px;
+        }
+        
+        .pagination a.active {
+            background-color: #8e2323;
+            color: white;
+            border: 1px solid #8e2323;
+        }
+        
+        .pagination a:hover:not(.active) {
+            background-color: #f1f1f1;
+        }
+        
+        /* 文章详情样式 */
+        .article-detail {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .article-detail h2 {
+            color: #8e2323;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+        
+        .article-detail .meta {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            color: #444;
+            font-size: 16px;
+        }
+        
+        .article-content p {
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+        
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            border-radius: 4px;
+            display: block;
+        }
+        
+        .article-content h3 {
+            color: #8e2323;
+            margin: 20px 0 15px;
+            font-size: 20px;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 15px 0 15px 40px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #8e2323;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar h3 {
+            color: #8e2323;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .popular-articles {
+            list-style: none;
+        }
+        
+        .popular-articles li {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .popular-articles li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-articles a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .popular-articles a:hover {
+            color: #8e2323;
+        }
+        
+        .article-date {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: #ddd;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section h4 {
+            color: #f8d7a3;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #f8d7a3;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #ddd;
+            font-size: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">荣耀权氏</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="about.html"><i class="fas fa-tree"></i> 家族介绍</a></li>
+                <li><a href="stories.html"><i class="fas fa-book-open"></i> 家族纪事</a></li>
+                <li><a href="literature.html" class="active"><i class="fas fa-pen"></i> 写作专栏</a></li>
+                <li><a href="policy.html"><i class="fas fa-file-alt"></i> 政策宣传</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> 家族相册</a></li>
+                <li><a href="quan-family.html"><i class="fas fa-book"></i> 权氏族谱</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 写作专栏主内容 -->
+    <div class="container">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <a href="index.html">首页</a> &gt; <span>写作专栏</span>
+        </div>
+        
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>家族写作专栏</h1>
+            <p>记录家族故事，传承家族文化</p>
+        </div>
+        
+        <div class="writing-container">
+            <!-- 主内容区 -->
+            <div class="main-content">
+                <!-- 文章列表 -->
+                <div class="article-list">
+                    <h2><i class="fas fa-book-open"></i> 家族作品集</h2>
+                    
+                    <!-- 示例文章1 -->
+                    <div class="article-item">
+                        <div class="article-title">
+                            <a href="article-detail.html?id=1">《祠堂的记忆》</a>
+                        </div>
+                        <div class="article-meta">
+                            作者：权文博 | 发布日期：2025-03-15 | 分类：家族历史
+                        </div>
+                        <div class="article-excerpt">
+                            记得那是1985年的夏天，我们全家还住在陇西县权家湾的老宅院里。那是一座典型的西北四合院，青砖灰瓦，院子里有一棵百年老槐树...
+                        </div>
+                    </div>
+                    
+                    <!-- 示例文章2 -->
+                    <div class="article-item">
+                        <div class="article-title">
+                            <a href="article-detail.html?id=2">《消失的家乡小吃》</a>
+                        </div>
+                        <div class="article-meta">
+                            作者：权丽华 | 发布日期：2025-02-28 | 分类：回忆录
+                        </div>
+                        <div class="article-excerpt">
+                            记忆中，家乡有一种特别的小吃叫"权家糖饼"，外酥里嫩，甜而不腻。每到过年，奶奶总会做上几十个，分给左邻右舍...
+                        </div>
+                    </div>
+                    
+                    <!-- 示例文章3 -->
+                    <div class="article-item">
+                        <div class="article-title">
+                            <a href="article-detail.html?id=3">《家书抵万金》</a>
+                        </div>
+                        <div class="article-meta">
+                            作者：权志强 | 发布日期：2025-01-10 | 分类：家风家训
+                        </div>
+                        <div class="article-excerpt">
+                            整理父亲遗物时，发现一沓发黄的信件，是上世纪70年代父亲与祖父的往来家书。信中字里行间流露出的亲情与教诲，让我潸然泪下...
+                        </div>
+                    </div>
+                    
+                    <!-- 示例文章4 -->
+                    <div class="article-item">
+                        <div class="article-title">
+                            <a href="article-detail.html?id=4">《爷爷的创业故事》</a>
+                        </div>
+                        <div class="article-meta">
+                            作者：权小芳 | 发布日期：2024-12-05 | 分类：人物传记
+                        </div>
+                        <div class="article-excerpt">
+                            爷爷是家族中第一个走出陇西的人。1950年，他带着仅有的5元钱，徒步走到兰州，开始做小生意。那时的条件非常艰苦，但他凭着勤劳和诚信，慢慢积累起了第一桶金...
+                        </div>
+                    </div>
+                    
+                    <!-- 示例文章5 -->
+                    <div class="article-item">
+                        <div class="article-title">
+                            <a href="article-detail.html?id=5">《家族迁徙史》</a>
+                        </div>
+                        <div class="article-meta">
+                            作者：权建国 | 发布日期：2024-11-20 | 分类：家族历史
+                        </div>
+                        <div class="article-excerpt">
+                            据家谱记载，我们权氏家族最早可以追溯到明朝洪武年间。先祖从山西大槐树迁至甘肃陇西，历经六百年风雨，生生不息...
+                        </div>
+                    </div>
+                    
+                    <!-- 分页 -->
+                    <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">&raquo;</a>
+                    </div>
+                </div>
+                
+                <!-- 文章示例模板 -->
+                <div class="article-detail">
+                    <h2>《如何撰写家族故事》</h2>
+                    <div class="meta">
+                        作者：权氏家族编委会 | 发布日期：2025-01-15 | 分类：写作指南
+                    </div>
+                    
+                    <div class="article-content">
+                        <h3>一、文章标题</h3>
+                        <p>好的标题应该简洁明了，能够概括文章主要内容。例如：《记忆中的老宅院》、《爷爷的创业故事》、《家族迁徙史》等。</p>
+                        
+                        <h3>二、文章开头</h3>
+                        <p>可以从时间、地点或场景描写开始，营造氛围：</p>
+                        <p>"记得那是1985年的夏天，我们全家还住在陇西县权家湾的老宅院里。那是一座典型的西北四合院，青砖灰瓦，院子里有一棵百年老槐树..."</p>
+                        
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="家族老宅示例">
+                        
+                        <h3>三、文章主体</h3>
+                        <p>可以包含以下内容：</p>
+                        <ul>
+                            <li>具体的人物和事件</li>
+                            <li>历史背景和社会环境</li>
+                            <li>家族传统和习俗</li>
+                            <li>个人感受和思考</li>
+                        </ul>
+                        
+                        <p>示例段落：</p>
+                        <p>"爷爷是家族中第一个走出陇西的人。1950年，他带着仅有的5元钱，徒步走到兰州，开始做小生意。那时的条件非常艰苦，但他凭着勤劳和诚信，慢慢积累起了第一桶金..."</p>
+                        
+                        <h3>四、文章结尾</h3>
+                        <p>可以总结感悟或表达情感：</p>
+                        <p>"如今，老宅院已经不在了，但那些温暖的记忆永远留在我的心里。每当我给孩子们讲述这些故事时，都能感受到家族血脉的延续和传承..."</p>
+                        
+                        <h3>五、写作技巧</h3>
+                        <ol>
+                            <li>尽量使用具体细节，避免泛泛而谈</li>
+                            <li>可以采访家族长辈获取第一手资料</li>
+                            <li>适当加入当时的时代背景</li>
+                            <li>保持真实，不夸大不虚构</li>
+                        </ol>
+                        
+                        <h3>六、投稿方式</h3>
+                        <p>请将您的作品发送至邮箱：quanshi@qq.com，邮件标题格式为"【投稿】+文章标题"。</p>
+                        <p>投稿格式要求：</p>
+                        <ul>
+                            <li>Word文档格式</li>
+                            <li>标题：三号黑体</li>
+                            <li>正文：小四号宋体，1.5倍行距</li>
+                            <li>文末注明作者姓名和联系方式</li>
+                        </ul>
+                        
+                        <a href="literature.html" class="back-link"><i class="fas fa-arrow-left"></i> 返回文章列表</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <h3><i class="fas fa-fire"></i> 热门文章</h3>
+                <ul class="popular-articles">
+                    <li>
+                        <a href="article-detail.html?id=1">《祠堂的记忆》</a>
+                        <div class="article-date">2025-03-15</div>
+                    </li>
+                    <li>
+                        <a href="article-detail.html?id=2">《消失的家乡小吃》</a>
+                        <div class="article-date">2025-02-28</div>
+                    </li>
+                    <li>
+                        <a href="article-detail.html?id=3">《家书抵万金》</a>
+                        <div class="article-date">2025-01-10</div>
+                    </li>
+                    <li>
+                        <a href="article-detail.html?id=4">《爷爷的创业故事》</a>
+                        <div class="article-date">2024-12-05</div>
+                    </li>
+                    <li>
+                        <a href="article-detail.html?id=5">《家族迁徙史》</a>
+                        <div class="article-date">2024-11-20</div>
+                    </li>
+                </ul>
+                
+                <h3 style="margin-top: 30px;"><i class="fas fa-tags"></i> 文章分类</h3>
+                <ul class="popular-articles">
+                    <li><a href="#">家族历史 (23)</a></li>
+                    <li><a href="#">人物传记 (15)</a></li>
+                    <li><a href="#">家风家训 (12)</a></li>
+                    <li><a href="#">回忆录 (18)</a></li>
+                    <li><a href="#">诗歌散文 (7)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>权氏家族</h4>
+                <p>传承家族文化 · 凝聚亲情力量</p>
+            </div>
+            <div class="footer-section">
+                <h4>联系方式</h4>
+                <p><i class="fas fa-envelope"></i> quanshi@qq.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 甘肃省陇西县权家湾镇深沟社</p>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-qq"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 权氏家族网 | 传承不息 亲情永续</p>
+        </div>
+    </footer>
+</body>
+</html>

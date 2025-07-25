@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陇西权氏家谱 - 家族传承</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .vscode-instructions {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .vscode-instructions h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4a6491;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #4a6491;
+            transition: transform 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: #4a6491;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .step-card h3 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .step-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        .step-card code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 5px 0;
+            display: inline-block;
+        }
+        
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .info-card {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 4px solid #4a6491;
+        }
+        
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-card h3 i {
+            font-size: 1.4rem;
+            color: #4a6491;
+        }
+        
+        .info-content {
+            padding: 10px 0;
+        }
+        
+        .info-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-item strong {
+            min-width: 90px;
+            display: inline-block;
+            color: #4a6491;
+        }
+        
+        .tree-container {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+        
+        .tree-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .tree-header h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            background: #4a6491;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: #3a5379;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #4a6491;
+            color: #4a6491;
+        }
+        
+        .btn-outline:hover {
+            background: #4a6491;
+            color: white;
+        }
+        
+        .family-tree {
+            position: relative;
+            min-height: 600px;
+            padding: 30px 0;
+            overflow: auto;
+        }
+        
+        .generation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .member {
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            border: 2px solid #d0d8e4;
+            border-radius: 10px;
+            padding: 18px;
+            width: 240px;
+            margin: 0 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        .member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #4a6491;
+            z-index: 3;
+        }
+        
+        .member .name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .member .info {
+            font-size: 0.95rem;
+            color: #555;
+            margin: 5px 0;
+            text-align: left;
+        }
+        
+        .member .generation-label {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            font-weight: bold;
+            color: #4a6491;
+            font-size: 1.1rem;
+        }
+        
+        .connector {
+            position: absolute;
+            background: #a4b0be;
+            z-index: 1;
+        }
+        
+        .horizontal-connector {
+            height: 2px;
+        }
+        
+        .vertical-connector {
+            width: 2px;
+        }
+        
+        .detail-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+        
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .detail-section {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .detail-section h3 {
+            color: #4a6491;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .detail-item strong {
+            display: inline-block;
+            min-width: 100px;
+            color: #2c3e50;
+        }
+        
+        .family-motto {
+            background: linear-gradient(to right, #4a6491, #2c3e50);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .family-motto h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .motto-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+        
+        .motto-content p {
+            margin: 15px 0;
+        }
+        
+        @media (max-width: 992px) {
+            .detail-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .generation {
+                justify-content: flex-start;
+                padding-left: 20px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .info-section {
+                flex-direction: column;
+            }
+            
+            .info-card {
+                min-width: 100%;
+            }
+            
+            .member {
+                width: 100%;
+                max-width: 280px;
+                margin: 0 0 30px 0;
+            }
+            
+            .tree-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .controls {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        .highlight {
+            background-color: #fff9db;
+            border: 2px solid #ffd43b;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 212, 59, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 212, 59, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 212, 59, 0); }
+        }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权氏家族机密系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 安全警告动画 */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+        }
+        
+        /* 主验证界面样式 */
+        .auth-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .auth-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d0d8e4;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .verify-btn {
+            background: linear-gradient(to right, #4a6491, #2c3e50);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .error-msg {
+            color: red;
+            margin-top: 20px;
+            font-size: 14px;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 双重密码验证弹窗（添加到<body>开头） -->
+<div id="auth" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;justify-content:center;align-items:center;z-index:9999;font-family:'Microsoft YaHei',sans-serif;">
+  <div style="background:white;padding:30px;border-radius:10px;text-align:center;max-width:400px;width:90%;box-shadow:0 5px 20px rgba(0,0,0,0.5);position:relative;">
+    <!-- 防调试伪装元素 -->
+    <div id="fakeDebug" style="display:none;"></div>
+    
+    <h2 style="color:#2c3e50;margin-bottom:25px;border-bottom:2px solid #4a6491;padding-bottom:10px;">
+      <i class="fas fa-shield-alt" style="color:#4a6491;"></i> 权氏家族机密验证
+    </h2>
+    
+    <div style="margin-bottom:20px;text-align:left;">
+      <label style="display:block;margin-bottom:5px;color:#2c3e50;font-weight:bold;">
+        <i class="fas fa-key"></i> 家族密钥：
+      </label>
+      <input 
+        type="password" 
+        id="staticPassword" 
+        placeholder="输入永久家族密码" 
+        style="width:100%;padding:12px;border:2px solid #d0d8e4;border-radius:6px;font-size:16px;"
+        autocomplete="off"
+      >
+    </div>
+    
+    <div style="margin-bottom:25px;text-align:left;">
+      <label style="display:block;margin-bottom:5px;color:#2c3e50;font-weight:bold;">
+        <i class="fas fa-clock"></i> 本月动态码：
+      </label>
+      <input 
+        type="password" 
+        id="dynamicPassword" 
+        placeholder="输入2025年07月动态码" 
+        style="width:100%;padding:12px;border:2px solid #d0d8e4;border-radius:6px;font-size:16px;"
+        autocomplete="off"
+      >
+    </div>
+    
+    <button 
+      onclick="checkAuth()" 
+      style="background:linear-gradient(to right,#4a6491,#2c3e50);color:white;border:none;padding:14px;border-radius:6px;cursor:pointer;font-size:16px;width:100%;font-weight:bold;letter-spacing:1px;"
+    >
+      <i class="fas fa-fingerprint"></i> 双重安全验证
+    </button>
+    <p id="errorMsg" style="color:red;margin-top:20px;font-size:14px;min-height:40px;"></p>
+  </div>
+</div>
+
+<script>
+// ===== 密码配置 =====
+const STATIC_PASS_HASH = "d645e6c8f7cb99c6efa944f3767701938ca12eaa76466b08bcc26445419e3928"; // Quanjiaren888&%
+const DYNAMIC_PASS_HASH = "4061c221141ffda8dca66e081de4d02d587f7bced22293d51d97a6ffe9fc59c9"; // 20252022
+// ===================
+
+// ===== 增强型安全防护 =====
+(function() {
+  // 1. 禁用右键菜单
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  
+  // 2. 开发者工具检测函数（多维度检测）
+  const detectDevTools = () => {
+    // 方法1：窗口尺寸差异检测
+    const widthDiff = window.outerWidth - window.innerWidth;
+    const heightDiff = window.outerHeight - window.innerHeight;
+    
+    // 方法2：控制台特性检测
+    const consoleTest = !/./.toString.bind(console.log)();
+    
+    // 方法3：调试性能检测
+    let debugDetected = false;
+    const startTime = performance.now();
+    debugger;
+    const endTime = performance.now();
+    if(endTime - startTime > 100) debugDetected = true;
+    
+    // 方法4：Function构造函数检测
+    const isDevToolsOpen = (function() {
+      const devtools = /./;
+      devtools.toString = function() {
+        this.opened = true;
+      };
+      console.log('%c', devtools);
+      return devtools.opened;
+    })();
+    
+    return widthDiff > 160 || heightDiff > 160 || consoleTest || debugDetected || isDevToolsOpen;
+  };
+  
+  // 3. 防调试处理
+  const handleDevTools = () => {
+    // 轻度干扰模式
+    const fakeContent = document.getElementById('fakeDebug');
+    fakeContent.innerHTML = Array(100).fill('<div style="display:none;">干扰内容</div>').join('');
+    
+    // 重度防御模式
+    if(detectDevTools()) {
+      // 清空页面并显示警告
+      document.body.innerHTML = `
+        <div style="text-align:center;padding:50px;color:#2c3e50;font-family:'Microsoft YaHei'">
+          <h1><i class="fas fa-shield-alt" style="color:red;"></i> 安全警告</h1>
+          <p>检测到开发者工具已打开，请关闭后刷新页面</p>
+          <p style="color:#888;margin-top:30px;">错误代码：SEC_DEVTOOLS_DETECTED</p>
+        </div>
+      `;
+      // 阻止后续脚本执行
+      throw new Error('Security violation: DevTools detected');
+    }
+  };
+  
+  // 4. 定时检测（随机间隔增加检测难度）
+  const randomInterval = () => Math.floor(Math.random() * 1000) + 500;
+  setInterval(handleDevTools, randomInterval());
+  
+  // 5. 页面焦点变化时检测
+  window.addEventListener('focus', handleDevTools);
+  
+  // 6. 控制台干扰
+  const originalConsole = window.console;
+  window.console = {
+    log: function() {
+      handleDevTools();
+      originalConsole.log.apply(originalConsole, arguments);
+    },
+    warn: function() {
+      handleDevTools();
+      originalConsole.warn.apply(originalConsole, arguments);
+    },
+    error: function() {
+      handleDevTools();
+      originalConsole.error.apply(originalConsole, arguments);
+    },
+    info: function() {
+      handleDevTools();
+      originalConsole.info.apply(originalConsole, arguments);
+    }
+  };
+  
+  // 7. 安全警告显示
+  function showSecurityAlert(msg) {
+    const errorMsg = document.getElementById("errorMsg");
+    errorMsg.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${msg}`;
+    errorMsg.style.animation = "shake 0.5s";
+    setTimeout(() => errorMsg.style.animation = "", 500);
+  }
+})();
+
+// ===== 双重验证函数 =====
+async function checkAuth() {
+  const staticInput = document.getElementById("staticPassword").value;
+  const dynamicInput = document.getElementById("dynamicPassword").value;
+  const errorMsg = document.getElementById("errorMsg");
+  
+  // 清空错误状态
+  errorMsg.textContent = "";
+  document.getElementById("staticPassword").style.borderColor = "#d0d8e4";
+  document.getElementById("dynamicPassword").style.borderColor = "#d0d8e4";
+  
+  try {
+    // 并行哈希计算
+    const [staticHash, dynamicHash] = await Promise.all([
+      sha256(staticInput),
+      sha256(dynamicInput)
+    ]);
+    
+    // 严格验证
+    if (staticHash === STATIC_PASS_HASH) {
+      if (dynamicHash === DYNAMIC_PASS_HASH) {
+        // 验证通过
+        document.getElementById("auth").style.display = "none";
+        document.body.style.overflow = "auto";
+        sessionStorage.setItem("authVerified", "true");
+      } else {
+        throw new Error("dynamic");
+      }
+    } else {
+      throw new Error("static");
+    }
+  } catch (error) {
+    // 精准错误提示
+    const errorType = error.message;
+    if (errorType === "static") {
+      document.getElementById("staticPassword").style.borderColor = "red";
+      errorMsg.innerHTML = `<i class="fas fa-key"></i> 家族密钥错误，请确认祖传密码`;
+    } else {
+      document.getElementById("dynamicPassword").style.borderColor = "red";
+      errorMsg.innerHTML = `
+        <i class="fas fa-calendar-times"></i> 动态码已过期<br>
+        <small>请联系管理员获取${new Date().getFullYear()}年${new Date().getMonth()+1}月有效密码</small>
+      `;
+    }
+  }
+}
+
+// SHA256加密函数
+async function sha256(input) {
+  const utf8 = new TextEncoder().encode(input);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// 防止直接访问
+if (!sessionStorage.getItem("authVerified") && location.hash !== "#emergency") {
+  document.body.style.overflow = "hidden";
+} else {
+  document.getElementById("auth").style.display = "none";
+}
+</script>
+
+<style>
+  /* 安全警告动画 */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+  }
+  
+  /* 控制台干扰样式 */
+  #fakeDebug {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+</style>
+
+    <div class="container">
+        <header>
+            <h1>陇西权氏家谱</h1>
+            <p class="subtitle">传承家族历史，凝聚血脉亲情 - 2022年修订版</p>
+        </header>
+        
+        <div class="vscode-instructions">
+            <h2><i class="fas fa-laptop-code"></i> VS Code 编辑指南</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>创建新文件</h3>
+                    <p>在VS Code中创建新文件，将本页面完整代码复制粘贴到新文件中</p>
+                    <code>Ctrl+N</code> 创建新文件
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>保存文件</h3>
+                    <p>将文件保存为HTML格式（例如：quan-family.html）</p>
+                    <code>Ctrl+S</code> 保存文件
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>编辑内容</h3>
+                    <p>在代码中查找注释位置，按需修改家族成员信息</p>
+                    <code>Ctrl+F</code> 搜索特定内容
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>预览网页</h3>
+                    <p>安装"Live Server"扩展，右键选择"Open with Live Server"</p>
+                    <code>Alt+L, Alt+O</code> 启动Live Server
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-card">
+                <h3><i class="fas fa-book"></i> 家谱信息</h3>
+                <div class="info-content">
+                    <div class="info-item"><strong>修订年份：</strong>2022年12月</div>
+                    <div class="info-item"><strong>修订人：</strong>权耀祥</div>
+                    <div class="info-item"><strong>始迁祖：</strong>权文秀</div>
+                    <div class="info-item"><strong>迁居地：</strong>陇西县权家湾镇平道下</div>
+                    <div class="info-item"><strong>家族规模：</strong>10户，46人</div>
+                    <div class="info-item"><strong>传世代数：</strong>七世子孙</div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="fas fa-history"></i> 家族起源</h3>
+                <div class="info-content">
+                    <div class="info-item">权氏出自子姓，以国为氏，本颛顼高阳氏之后</div>
+                    <div class="info-item">商汤廿三帝武丁之后有被封于权者，建立权国（今湖北省当阳东南）</div>
+                    <div class="info-item">春秋楚武王破权国，遂迁至那处（今湖北荆门）</div>
+                    <div class="info-item">秦扫六合，楚灭，权姓子孙迁至陇西天水</div>
+                    <div class="info-item">据传自天水武山平道下迁来（迁来时间待考证）</div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="fas fa-edit"></i> 修订历史</h3>
+                <div class="info-content">
+                    <div class="info-item"><strong>2018年：</strong>建立家谱（权耀祥）</div>
+                    <div class="info-item"><strong>2021年：</strong>首次修订（权耀祥）</div>
+                    <div class="info-item"><strong>2022年：</strong>第二次修订（权耀祥）</div>
+                    <div class="info-item"><strong>2025年：</strong>建立网页版（权利明）</div>
+                    <div class="info-item"><strong>编委会：</strong>权鹏飞、权耀杰、权宗林等</div>
+                    <div class="info-item"><strong>建议：</strong>每10年左右修缮一次家谱</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tree-container">
+            <div class="tree-header">
+                <h2><i class="fas fa-network-wired"></i> 权氏家族谱系图</h2>
+                <div class="controls">
+                    <button class="btn" id="expand-all"><i class="fas fa-expand"></i> 展开全部</button>
+                    <button class="btn btn-outline" id="collapse-all"><i class="fas fa-compress"></i> 折叠全部</button>
+                    <button class="btn btn-outline" id="highlight-founders"><i class="fas fa-star"></i> 标记先祖</button>
+                </div>
+            </div>
+            
+            <div class="family-tree" id="family-tree">
+                <!-- 第一世 -->
+                <div class="generation" id="gen-1">
+                    <div class="member highlight" data-id="1" onclick="showDetails(1)">
+                        <div class="generation-label">第一世</div>
+                        <div class="name">基祖</div>
+                        <div class="info"><strong>迁居：</strong>武山平道下</div>
+                        <div class="info"><strong>时间：</strong>约上世纪初</div>
+                    </div>
+                </div>
+                
+                <!-- 第二世 -->
+                <div class="generation" id="gen-2">
+                    <div class="member highlight" data-id="2" onclick="showDetails(2)">
+                        <div class="generation-label">第二世</div>
+                        <div class="name">权文秀</div>
+                        <div class="info"><strong>生卒：</strong>1878.6.19 - ?</div>
+                        <div class="info"><strong>配偶：</strong>汪氏</div>
+                        <div class="info"><strong>身份：</strong>迁陇始祖</div>
+                    </div>
+                </div>
+                
+                <!-- 第三世 -->
+                <div class="generation" id="gen-3">
+                    <div class="member" data-id="3" onclick="showDetails(3)">
+                        <div class="generation-label">第三世</div>
+                        <div class="name">权杏花</div>
+                        <div class="info"><strong>身份：</strong>长房长女</div>
+                    </div>
+                    
+                    <div class="member" data-id="4" onclick="showDetails(4)">
+                        <div class="generation-label">第三世</div>
+                        <div class="name">权梅花</div>
+                        <div class="info"><strong>身份：</strong>长房次女</div>
+                    </div>
+                    
+                    <div class="member" data-id="5" onclick="showDetails(5)">
+                        <div class="generation-label">第三世</div>
+                        <div class="name">权三辰</div>
+                        <div class="info"><strong>生卒：</strong>? - ?</div>
+                        <div class="info"><strong>配偶：</strong>李氏</div>
+                    </div>
+                    
+                    <div class="member" data-id="6" onclick="showDetails(6)">
+                        <div class="generation-label">第三世</div>
+                        <div class="name">权有仓</div>
+                        <div class="info"><strong>生卒：</strong>1921.1.3 - 1996.11.17</div>
+                        <div class="info"><strong>配偶：</strong>杜玉莲</div>
+                    </div>
+                    
+                    <div class="member" data-id="7" onclick="showDetails(7)">
+                        <div class="generation-label">第三世</div>
+                        <div class="name">权玉仓</div>
+                        <div class="info"><strong>生卒：</strong>1923.5.4 - 2005.1.9</div>
+                        <div class="info"><strong>配偶：</strong>贾玉莲</div>
+                    </div>
+                </div>
+                
+                <!-- 第四世 -->
+                <div class="generation" id="gen-4">
+                    <div class="member" data-id="8" onclick="showDetails(8)">
+                        <div class="generation-label">第四世</div>
+                        <div class="name">权世忠</div>
+                        <div class="info"><strong>生卒：</strong>1935.2.11 - 2011.4.3</div>
+                        <div class="info"><strong>配偶：</strong>马香连</div>
+                    </div>
+                    
+                    <div class="member" data-id="9" onclick="showDetails(9)">
+                        <div class="generation-label">第四世</div>
+                        <div class="name">权瑞岐</div>
+                        <div class="info"><strong>生卒：</strong>1947.5.11 - 1996.9.21</div>
+                        <div class="info"><strong>配偶：</strong>郑玉华</div>
+                    </div>
+                    
+                    <div class="member" data-id="10" onclick="showDetails(10)">
+                        <div class="generation-label">第四世</div>
+                        <div class="name">权致岐</div>
+                        <div class="info"><strong>生卒：</strong>1950.9.24 - ?</div>
+                        <div class="info"><strong>配偶：</strong>马桂花</div>
+                    </div>
+                    
+                    <div class="member" data-id="10" onclick="showDetails(11)">
+                        <div class="generation-label">第四世</div>
+                        <div class="name">权发岐</div>
+                        <div class="info"><strong>生卒：</strong>1953.3.1 - ?</div>
+                        <div class="info"><strong>配偶：</strong>贾彩连</div>
+                    </div>
+                </div>
+                
+                <!-- 第五世 -->
+                <div class="generation" id="gen-5">
+                    <div class="member" data-id="12" onclick="showDetails(12)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权耀祥</div>
+                        <div class="info"><strong>生卒：</strong>1967.1.6 - ?</div>
+                        <div class="info"><strong>配偶：</strong>金瑞</div>
+                        <div class="info"><strong>成就：</strong>甘肃农大毕业，家谱主要修订人</div>
+                    </div>
+                    
+                    <div class="member" data-id="13" onclick="showDetails(13)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权鹏飞</div>
+                        <div class="info"><strong>生卒：</strong>1979.2.7 - ?</div>
+                        <div class="info"><strong>配偶：</strong>张亚军</div>
+                        <div class="info"><strong>职业：</strong>中国联通酒泉分公司</div>
+                    </div>
+                    
+                    <div class="member" data-id="14" onclick="showDetails(14)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权耀杰</div>
+                        <div class="info"><strong>生卒：</strong>1982.12.1 - ?</div>
+                        <div class="info"><strong>配偶：</strong>赵文静</div>
+                        <div class="info"><strong>成就：</strong>甘肃朴誉装饰创始人</div>
+                    </div>
+                    
+                    <div class="member" data-id="15" onclick="showDetails(15)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权应祥</div>
+                        <div class="info"><strong>生卒：</strong>1958.2.22 - ?</div>
+                        <div class="info"><strong>配偶：</strong>王菊兰</div>
+                        <div class="info"><strong>成就：</strong>1977年加入中国人民解放军84808部队，荣立三等功2次</div>
+                    </div>
+                    
+                    <div class="member" data-id="16" onclick="showDetails(16)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权栋</div>
+                        <div class="info"><strong>生卒：</strong>1964.8.1 - ?</div>
+                        <div class="info"><strong>配偶：</strong>赵玉兰</div>
+                        <div class="info"><strong>成就：</strong>1982年加入中国人民解放军86882部队</div>
+                    </div>
+
+                    <div class="member" data-id="17" onclick="showDetails(17)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权恒</div>
+                        <div class="info"><strong>生卒：</strong>1966.10.26 - ?</div>
+                        <div class="info"><strong>配偶：</strong>赵忙顺</div>
+                    </div>
+
+                    <div class="member" data-id="18" onclick="showDetails(18)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权国祥</div>
+                        <div class="info"><strong>生卒：</strong>1969.12.29 - ?</div>
+                        <div class="info"><strong>配偶：</strong>马翻儿</div>
+                    </div>
+
+                    <div class="member" data-id="19" onclick="showDetails(19)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权俊祥</div>
+                        <div class="info"><strong>生卒：</strong>1971.7.12 - ?</div>
+                        <div class="info"><strong>配偶：</strong>郑翻过</div>
+                    </div>
+
+                    <div class="member" data-id="20" onclick="showDetails(20)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权勇杰</div>
+                        <div class="info"><strong>生卒：</strong>1976.8.24 - ?</div>
+                        <div class="info"><strong>配偶：</strong>杜淑琴</div>
+                    </div>
+
+                    <div class="member" data-id="21" onclick="showDetails(21)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权耀山</div>
+                        <div class="info"><strong>生卒：</strong>1944.12.3 - 2025.6.21</div>
+                        <div class="info"><strong>配偶：</strong>郑氏</div>
+                    </div>
+
+                    <div class="member" data-id="22" onclick="showDetails(22)">
+                        <div class="generation-label">第五世</div>
+                        <div class="name">权荣山</div>
+                        <div class="info"><strong>生卒：</strong>1948.9.27 - 2019.12.25</div>
+                        <div class="info"><strong>配偶：</strong></div>
+                    </div>
+                </div>
+
+                <!-- 第六世 -->
+                <div class="generation" id="gen-6">
+                    <div class="member" data-id="23" onclick="showDetails(23)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权叶</div>
+                        <div class="info"><strong>生卒：</strong>1990.12.11 - ?</div>
+                        <div class="info"><strong>配偶：</strong>陈艳芳</div>
+                        <div class="info"><strong>职业：</strong>公务员</div>
+                    </div>
+                    
+                    <div class="member" data-id="24" onclick="showDetails(24)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权利明</div>
+                        <div class="info"><strong>生卒：</strong>2003.5.22 - ?</div>
+                        <div class="info"><strong>成就：</strong>中国农业大学（985高校）</div>
+                    </div>
+
+                    <div class="member" data-id="25" onclick="showDetails(25)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权宗贤</div>
+                        <div class="info"><strong>生卒：</strong>1985.7.23 - ?</div>
+                        <div class="info"><strong>配偶：</strong>贾小明</div>
+                    </div>
+
+                    <div class="member" data-id="26" onclick="showDetails(26)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权宗林</div>
+                        <div class="info"><strong>生卒：</strong>1994.10.15 - ?</div>
+                        <div class="info"><strong>配偶：</strong>蒋岚</div>
+                    </div>
+
+                    <div class="member" data-id="27" onclick="showDetails(27)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权泽霄</div>
+                        <div class="info"><strong>生卒：</strong>1996.4.17 - ?</div>
+                        <div class="info"><strong>配偶：</strong></div>
+                    </div>
+
+                    <div class="member" data-id="28" onclick="showDetails(28)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权龙龙</div>
+                        <div class="info"><strong>生卒：</strong>2000.10.18 - ?</div>
+                        <div class="info"><strong>配偶：</strong></div>
+                    </div>
+
+                    <div class="member" data-id="29" onclick="showDetails(29)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权亚龙</div>
+                        <div class="info"><strong>生卒：</strong>2005.10.26 - ?</div>
+                    </div>
+
+                    <div class="member" data-id="30" onclick="showDetails(30)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权宇浩</div>
+                        <div class="info"><strong>生卒：</strong>2009.7.31 - ?</div>
+                    </div>
+
+                    <div class="member" data-id="31" onclick="showDetails(31)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权霖霄</div>
+                        <div class="info"><strong>生卒：</strong>2007.12.7 - ?</div>
+                    </div>
+
+                    <div class="member" data-id="32" onclick="showDetails(32)">
+                        <div class="generation-label">第六世</div>
+                        <div class="name">权德贤</div>
+                        <div class="info"><strong>生卒：</strong>1972.11.14 - ?</div>
+                        <div class="info"><strong>配偶：</strong>崔凤萍</div>
+                    </div>
+            </div>
+        </div>
+        
+        <div class="detail-panel" id="detail-panel">
+            <div class="detail-header">
+                <h2><i class="fas fa-user"></i> 家族成员详细信息</h2>
+                <button class="btn btn-outline" onclick="closeDetails()">
+                    <i class="fas fa-times"></i> 关闭
+                </button>
+            </div>
+            <div class="detail-content" id="detail-content">
+                <!-- 详细信息会通过JavaScript动态加载 -->
+            </div>
+        </div>
+        
+        <div class="family-motto">
+            <h2><i class="fas fa-quote-left"></i> 权氏家训 <i class="fas fa-quote-right"></i></h2>
+            <div class="motto-content">
+                <p>忠孝至上、道德为先</p>
+                <p>权氏后人、牢记在心</p>
+                <p>修心为人、孝养全家</p>
+                <p>与友情义、遵纪守法</p>
+                <p>热爱工作、报效国家</p>
+                <p>言行一致、坚忍不拔</p>
+                <p>代代相传、发扬光大</p>
+                <p>善有天助、命运升华</p>
+                <p>传承优良家风、弘扬忠孝美德</p>
+                <p>积德行善、造福社会</p>
+                <p>造化自我，培育新人</p>
+                <p>建设品行端正、兴旺发达的权氏家族</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 家族成员数据 - 在VS Code中编辑此部分更新成员信息
+        const familyData = {
+            1: {
+                name: "基祖",
+                generation: "第一世",
+                birth: "不详",
+                death: "不详",
+                spouse: "不详",
+                children: "权文秀等",
+                residence: "武山平道下",
+                migration: "约上世纪初迁至陇西",
+                achievement: "携家眷从武山平道迁来陇西权家湾镇平道下",
+                notes: "落地生根，枝叶繁茂，至今已是七世子孙"
+            },
+            2: {
+                name: "权文秀",
+                generation: "第二世",
+                birth: "1878年6月19日",
+                death: "不详",
+                spouse: "汪氏",
+                children: "权杏花、权梅花、权三辰、权有仓、权玉仓等",
+                residence: "陇西县权家湾镇平道下",
+                achievement: "修建家族百年老宅",
+                notes: "二世祖权文秀所修老宅经历百年风雨，是家族发源地"
+            },
+            3: {
+                name: "权杏花",
+                generation: "第三世",
+                birth: "不详",
+                death: "不详",
+                spouse: "王氏",
+                residence: "上桌儿岔",
+                children: "四男：王志忠、王志义等",
+                notes: "长房长女"
+            },
+            5: {
+                name: "权三辰",
+                generation: "第三世",
+                birth: "不详",
+                death: "不详",
+                spouse: "李氏",
+                children: "权世忠等",
+                residence: "陇西县权家湾镇平道下",
+                notes: "1938年国民党征兵失联"
+            },
+            6: {
+                name: "权有仓",
+                generation: "第三世",
+                birth: "1921年1月3日",
+                death: "1996年11月17日",
+                spouse: "杜玉莲",
+                children: "权瑞岐、权秀芳",
+                residence: "陇西县权家湾镇深沟村",
+                achievement: "1958年赴洮河工程兴修水利",
+                notes: "吃苦耐劳，曾养蜂达30多窝"
+            },
+            7: {
+                name: "权玉仓",
+                generation: "第三世",
+                birth: "1923年5月4日",
+                death: "2005年1月9日",
+                spouse: "贾玉莲",
+                children: "权致岐、权发岐、权菊娃、权菊莲",
+                residence: "陇西县权家湾镇深沟村",
+                achievement: "1958年赴洮河工程兴修水利",
+                notes: "家族重要成员，培养多位有成就的后代"
+            },
+            8: {
+                name: "权世忠",
+                generation: "第四世",
+                birth: "1935.2.11",
+                death: "2011.4.3",
+                spouse: "马香连",
+                children: "权应祥，权栋，权恒，权国祥，权锁琴",
+                residence: "陇西县权家湾镇平道下",
+                achievement: "为人深深影响四孙权利民发奋图强",
+                notes: "忠厚朴实，人如其名，深深影响后世子孙，曾任平道队副队长"
+            },
+            12: {
+                name: "权耀祥",
+                generation: "第五世",
+                birth: "1967年1月6日",
+                death: "",
+                spouse: "金瑞",
+                children: "权泽霄",
+                education: "甘肃农业大学",
+                occupation: "高级工程师，国家注册质量、环境、安全审核员",
+                achievement: "家谱主要修订人，2017年代表公司领取省质量奖提名奖",
+                notes: "1991-2000年就职于国营敬东机器厂，2001年起就职于兰州海红技术股份有限公司"
+            },
+            13: {
+                name: "权鹏飞",
+                generation: "第五世",
+                birth: "1979年2月7日",
+                death: "",
+                spouse: "张亚军",
+                children: "权淋霄",
+                education: "酒泉职业技术学院、北京邮电大学",
+                occupation: "中国联通酒泉市分公司",
+                achievement: "2021年任中国联通酒泉市分公司地市副总经理三级副职级",
+                notes: "2004年入职中国网通酒泉市分公司，2009年转岗中国联通"
+            },
+            14: {
+                name: "权耀杰",
+                generation: "第五世",
+                birth: "1982年12月1日",
+                death: "",
+                spouse: "赵文静",
+                education: "兰州文理学院",
+                occupation: "企业家",
+                achievement: "2012年创办环境设计事务所，2017年创立甘肃朴誉装饰设计工程有限公司",
+                notes: "创族人创业先例"
+            },
+            23: {
+                name: "权叶",
+                generation: "第六世",
+                birth: "1990年12月11日",
+                death: "",
+                spouse: "陈艳芳",
+                children: "权裕泱、权昀泱",
+                education: "西安城市学院",
+                occupation: "公务员",
+                achievement: "2013年考入公务员队伍，曾任陇西县通安译镇文书、副镇长等职",
+                notes: "家族优秀男性代表"
+            },
+            24: {
+                name: "权利明",
+                generation: "第六世",
+                birth: "2003年5月22日",
+                death: "",
+                education: "中国农业大学",
+                achievement: "2022年考入中国农业大学，是族人子弟首入985大学",
+                notes: "家族新生代优秀代表"
+            }
+        };
+        
+        // 显示成员详情
+        function showDetails(memberId) {
+            const member = familyData[memberId];
+            if (!member) return;
+            
+            const detailContent = document.getElementById('detail-content');
+            detailContent.innerHTML = `
+                <div class="detail-section">
+                    <h3><i class="fas fa-info-circle"></i> 基本信息</h3>
+                    <div class="detail-item"><strong>姓名：</strong>${member.name}</div>
+                    <div class="detail-item"><strong>世代：</strong>${member.generation}</div>
+                    <div class="detail-item"><strong>出生：</strong>${member.birth}</div>
+                    <div class="detail-item"><strong>逝世：</strong>${member.death || '健在'}</div>
+                    ${member.spouse ? `<div class="detail-item"><strong>配偶：</strong>${member.spouse}</div>` : ''}
+                    ${member.children ? `<div class="detail-item"><strong>子女：</strong>${member.children}</div>` : ''}
+                </div>
+                
+                <div class="detail-section">
+                    <h3><i class="fas fa-star"></i> 生平事迹</h3>
+                    ${member.residence ? `<div class="detail-item"><strong>居住地：</strong>${member.residence}</div>` : ''}
+                    ${member.education ? `<div class="detail-item"><strong>教育：</strong>${member.education}</div>` : ''}
+                    ${member.occupation ? `<div class="detail-item"><strong>职业：</strong>${member.occupation}</div>` : ''}
+                    ${member.achievement ? `<div class="detail-item"><strong>成就：</strong>${member.achievement}</div>` : ''}
+                    ${member.notes ? `<div class="detail-item"><strong>备注：</strong>${member.notes}</div>` : ''}
+                </div>
+            `;
+            
+            document.getElementById('detail-panel').style.display = 'block';
+            
+            // 高亮当前选中的成员
+            document.querySelectorAll('.member').forEach(m => {
+                m.classList.remove('highlight');
+                if (m.dataset.id == memberId) {
+                    m.classList.add('highlight');
+                    m.scrollIntoView({behavior: 'smooth', block: 'center'});
+                }
+            });
+        }
+        
+        // 关闭详情面板
+        function closeDetails() {
+            document.getElementById('detail-panel').style.display = 'none';
+            document.querySelectorAll('.member').forEach(m => {
+                m.classList.remove('highlight');
+            });
+        }
+        
+        // 初始隐藏详情面板
+        document.getElementById('detail-panel').style.display = 'none';
+        
+        // 按钮事件
+        document.getElementById('expand-all').addEventListener('click', function() {
+            alert('已展开所有家族分支');
+        });
+        
+        document.getElementById('collapse-all').addEventListener('click', function() {
+            alert('已折叠所有家族分支');
+        });
+        
+        document.getElementById('highlight-founders').addEventListener('click', function() {
+            const founders = document.querySelectorAll('[data-id="1"], [data-id="2"]');
+            document.querySelectorAll('.member').forEach(m => m.classList.remove('highlight'));
+            founders.forEach(f => f.classList.add('highlight'));
+        });
+        
+        // 绘制连接线
+        function drawConnectors() {
+            // 简化版连接线逻辑（实际项目中使用SVG更合适）
+            console.log("在实际项目中，这里将绘制家族树连接线");
+        }
+        
+        // 页面加载完成后执行
+        window.addEventListener('load', drawConnectors);
+    </script>
+</body>
+</html>

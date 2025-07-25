@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权氏家族 | 陇西县惠农政策</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 惠农政策专属样式 */
+        .policy-section {
+            padding: 40px 0;
+        }
+        
+        .policy-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .policy-header h2 {
+            color: #8e2323;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .policy-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .policy-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .policy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .policy-card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .policy-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .policy-card:hover .policy-card-image img {
+            transform: scale(1.05);
+        }
+        
+        .policy-card-content {
+            padding: 20px;
+        }
+        
+        .policy-card-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .policy-card-date {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .policy-card-excerpt {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .policy-tags {
+            margin-bottom: 20px;
+        }
+        
+        .policy-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #666;
+            margin-right: 8px;
+        }
+        
+        .view-detail-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #8e2323;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .view-detail-btn:hover {
+            background: #6a1a1a;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .policy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .policy-card-image {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="logo">荣耀权氏</div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="about.html"><i class="fas fa-tree"></i> 家族介绍</a></li>
+            <li><a href="stories.html"><i class="fas fa-book-open"></i> 家族纪事</a></li>
+            <li><a href="literature.html"><i class="fas fa-pen"></i> 写作专栏</a></li>
+            <li><a href="policy.html" class="active"><i class="fas fa-file-alt"></i> 政策宣传</a></li>
+            <li><a href="gallery.html"><i class="fas fa-images"></i> 家族相册</a></li>
+            <li><a href="quan-family.html"><i class="fas fa-book"></i> 权氏族谱</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- 政策宣传主内容 -->
+    <main class="container">
+        <section class="policy-section">
+            <div class="policy-header">
+                <h2><i class="fas fa-tractor"></i> 陇西县惠农政策</h2>
+                <p>了解最新惠农政策，助力家族农业发展</p>
+            </div>
+            
+            <div class="policy-grid">
+                <!-- 政策1 -->
+                <div class="policy-card">
+                    <div class="policy-card-image">
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="农业补贴政策">
+                    </div>
+                    <div class="policy-card-content">
+                        <h3 class="policy-card-title">2025年农业产业扶持政策</h3>
+                        <div class="policy-card-date">发布日期: 2025-07-15</div>
+                        <p class="policy-card-excerpt">
+                            陇西县2025年继续加大对农业产业的扶持力度，重点支持中药材、马铃薯等特色产业发展...
+                        </p>
+                        <div class="policy-tags">
+                            <span class="policy-tag">农业补贴</span>
+                            <span class="policy-tag">产业发展</span>
+                        </div>
+                        <a href="policy-detail-1.html" class="view-detail-btn">查看详情</a>
+                    </div>
+                </div>
+                
+                <!-- 政策2 -->
+                <div class="policy-card">
+                    <div class="policy-card-image">
+                        <img src="https://images.unsplash.com/photo-1586773869418-4a8f210c1c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="高标准农田建设">
+                    </div>
+                    <div class="policy-card-content">
+                        <h3 class="policy-card-title">高标准农田建设补助政策</h3>
+                        <div class="policy-card-date">发布日期: 2025-07-18</div>
+                        <p class="policy-card-excerpt">
+                            2025年陇西县计划建设高标准农田5万亩，实施土地平整、灌溉排水等工程补助...
+                        </p>
+                        <div class="policy-tags">
+                            <span class="policy-tag">农田建设</span>
+                            <span class="policy-tag">补助政策</span>
+                        </div>
+                        <a href="policy-detail-2.html" class="view-detail-btn">查看详情</a>
+                    </div>
+                </div>
+                
+                <!-- 政策3 -->
+                <div class="policy-card">
+                    <div class="policy-card-image">
+                        <img src="https://images.unsplash.com/photo-1586773869418-4a8f210c1c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="农机购置补贴">
+                    </div>
+                    <div class="policy-card-content">
+                        <h3 class="policy-card-title">农机购置补贴实施方案</h3>
+                        <div class="policy-card-date">发布日期: 2025-06-20</div>
+                        <p class="policy-card-excerpt">
+                            2025年陇西县农机购置补贴政策，对购置符合条件的农业机械给予30%-50%的补贴...
+                        </p>
+                        <div class="policy-tags">
+                            <span class="policy-tag">农机补贴</span>
+                            <span class="policy-tag">农业机械</span>
+                        </div>
+                        <a href="policy-detail-3.html" class="view-detail-btn">查看详情</a>
+                    </div>
+                </div>
+                
+                <!-- 政策4 -->
+                <div class="policy-card">
+                    <div class="policy-card-image">
+                        <img src="https://images.unsplash.com/photo-1586773869418-4a8f210c1c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="中药材种植补贴">
+                    </div>
+                    <div class="policy-card-content">
+                        <h3 class="policy-card-title">中药材种植专项补贴</h3>
+                        <div class="policy-card-date">发布日期: 2025-05-10</div>
+                        <p class="policy-card-excerpt">
+                            对种植黄芪、党参、当归等中药材的农户，每亩给予300-500元补贴，鼓励规模化种植...
+                        </p>
+                        <div class="policy-tags">
+                            <span class="policy-tag">中药材</span>
+                            <span class="policy-tag">种植补贴</span>
+                        </div>
+                        <a href="policy-detail-4.html" class="view-detail-btn">查看详情</a>
+                    </div>
+                </div>
+                
+                <!-- 政策5 -->
+                <div class="policy-card">
+                    <div class="policy-card-image">
+                        <img src="https://images.unsplash.com/photo-1586773869418-4a8f210c1c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="养殖业扶持">
+                    </div>
+                    <div class="policy-card-content">
+                        <h3 class="policy-card-title">养殖业发展扶持政策</h3>
+                        <div class="policy-card-date">发布日期: 2025-04-15</div>
+                        <p class="policy-card-excerpt">
+                            对新建标准化养殖场给予每平方米50元补贴，引进优良种畜给予30%购种补贴...
+                        </p>
+                        <div class="policy-tags">
+                            <span class="policy-tag">养殖补贴</span>
+                            <span class="policy-tag">畜牧业</span>
+                        </div>
+                        <a href="policy-detail-5.html" class="view-detail-btn">查看详情</a>
+                    </div>
+                </div>
+                
+                <!-- 政策6 -->
+                <div class="policy-card">
+                    <div class="policy-card-image">
+                        <img src="https://images.unsplash.com/photo-1586773869418-4a8f210c1c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="农业保险">
+                    </div>
+                    <div class="policy-card-content">
+                        <h3 class="policy-card-title">农业保险保费补贴政策</h3>
+                        <div class="policy-card-date">发布日期: 2025-03-25</div>
+                        <p class="policy-card-excerpt">
+                            对参加农业保险的农户，县级财政给予保费50%的补贴，降低农业生产风险...
+                        </p>
+                        <div class="policy-tags">
+                            <span class="policy-tag">农业保险</span>
+                            <span class="policy-tag">风险防范</span>
+                        </div>
+                        <a href="policy-detail-6.html" class="view-detail-btn">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>权氏家族</h4>
+                <p>传承家族文化 · 凝聚亲情力量</p>
+            </div>
+            <div class="footer-section">
+                <h4>联系方式</h4>
+                <p><i class="fas fa-envelope"></i> quanshi@qq.com</p>
+                <p><i class="fas fa-location"></i> 甘肃省陇西县权家湾镇深沟社</p>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-qq"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 权氏家族网 | 传承不息 亲情永续</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

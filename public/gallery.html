@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权氏家族 | 家族相册</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f9f7f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 导航栏样式 */
+        nav {
+            background-color: #8e2323;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #f8d7a3;
+        }
+        
+        /* 面包屑导航 */
+        .breadcrumb {
+            padding: 15px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #8e2323;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin: 30px 0;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4a76a;
+        }
+        
+        .page-header h1 {
+            font-size: 32px;
+            color: #8e2323;
+            margin-bottom: 10px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .page-header p {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 相册分类导航 */
+        .album-categories {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #d4a76a;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            color: #8e2323;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: #8e2323;
+            color: white;
+            border-color: #8e2323;
+        }
+        
+        /* 相册网格 */
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .album-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .album-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+        
+        .album-cover {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .album-card:hover .album-cover img {
+            transform: scale(1.05);
+        }
+        
+        .album-count {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .album-info {
+            padding: 15px;
+        }
+        
+        .album-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .album-date {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        
+        .album-desc {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit—line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .view-album-btn {
+            display: inline-block;
+            padding: 6px 15px;
+            background-color: #8e2323;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .view-album-btn:hover {
+            background-color: #6a1a1a;
+        }
+        
+        /* 图片详情弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            color: #333;
+        }
+        
+        .close-modal {
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .photo-container {
+            margin-bottom: 20px;
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .photo-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .photo-desc {
+            margin-top: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        .photo-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .photo-nav-btn {
+            padding: 8px 15px;
+            background-color: #8e2323;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        /* 上传相册区域 */
+        .upload-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+        
+        .upload-section h2 {
+            color: #8e2323;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .upload-form {
+            border: 2px dashed #ddd;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .upload-form:hover {
+            border-color: #8e2323;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: #8e2323;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8e2323;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background-color: #6a1a1a;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #d4a76a;
+        }
+        
+        .footer-section p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            color: #fff;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #d4a76a;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .album-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .modal-content {
+                margin: 20px;
+                width: calc(100% - 40px);
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">荣耀权氏</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="about.html"><i class="fas fa-tree"></i> 家族介绍</a></li>
+                <li><a href="stories.html"><i class="fas fa-book-open"></i> 家族纪事</a></li>
+                <li><a href="literature.html"><i class="fas fa-pen"></i> 写作专栏</a></li>
+                <li><a href="policy.html"><i class="fas fa-file-alt"></i> 政策宣传</a></li>
+                <li><a href="gallery.html" class="active"><i class="fas fa-images"></i> 家族相册</a></li>
+                <li><a href="quan-family.html"><i class="fas fa-book"></i> 权氏族谱</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 相册主内容 -->
+    <div class="container">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <a href="index.html">首页</a> &gt; <span>家族相册</span>
+        </div>
+        
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>家族相册</h1>
+            <p>珍藏家族记忆，传承家族历史</p>
+        </div>
+        
+        <!-- 相册分类导航 -->
+        <div class="album-categories">
+            <button class="category-btn active" data-category="all">全部相册</button>
+            <button class="category-btn" data-category="reunion">家族团聚</button>
+            <button class="category-btn" data-category="history">历史照片</button>
+            <button class="category-btn" data-category="event">家族大事</button>
+            <button class="category-btn" data-category="portrait">人物肖像</button>
+            <button class="category-btn" data-category="village">家乡风貌</button>
+        </div>
+        
+        <!-- 相册网格 -->
+        <div class="album-grid">
+            <!-- 相册1 -->
+            <div class="album-card" data-category="reunion">
+                <div class="album-cover">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="2025年春节团聚">
+                    <div class="album-count">36张</div>
+                </div>
+                <div class="album-info">
+                    <h3 class="album-title">2025年春节大团聚</h3>
+                    <div class="album-date">2025年2月10日</div>
+                    <p class="album-desc">三年疫情后的首次大团聚，四世同堂的盛况让人感动，年轻一代组织了家族春晚...</p>
+                    <a href="#" class="view-album-btn" data-album="reunion2025">查看相册</a>
+                </div>
+            </div>
+            
+            <!-- 相册2 -->
+            <div class="album-card" data-category="history">
+                <div class="album-cover">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="老照片">
+                    <div class="album-count">24张</div>
+                </div>
+                <div class="album-info">
+                    <h3 class="album-title">家族老照片珍藏</h3>
+                    <div class="album-date">1950-1980年代</div>
+                    <p class="album-desc">收集整理的老照片，记录着家族从1950年代到1980年代的生活变迁...</p>
+                    <a href="#" class="view-album-btn" data-album="oldphotos">查看相册</a>
+                </div>
+            </div>
+            
+            <!-- 相册3 -->
+            <div class="album-card" data-category="event">
+                <div class="album-cover">
+                    <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="祠堂修缮">
+                    <div class="album-count">42张</div>
+                </div>
+                <div class="album-info">
+                    <h3 class="album-title">祠堂修缮工程记录</h3>
+                    <div class="album-date">2024年8月</div>
+                    <p class="album-desc">2024年家族祠堂修缮全过程记录，族人齐心协力恢复祖宅风貌...</p>
+                    <a href="#" class="view-album-btn" data-album="ancestralhall">查看相册</a>
+                </div>
+            </div>
+            
+            <!-- 相册4 -->
+            <div class="album-card" data-category="portrait">
+                <div class="album-cover">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="长辈肖像">
+                    <div class="album-count">18张</div>
+                </div>
+                <div class="album-info">
+                    <h3 class="album-title">家族长辈肖像</h3>
+                    <div class="album-date">2020-2025年</div>
+                    <p class="album-desc">为家族长辈拍摄的正式肖像，记录他们的音容笑貌，传承家族精神...</p>
+                    <a href="#" class="view-album-btn" data-album="elders">查看相册</a>
+                </div>
+            </div>
+            
+            <!-- 相册5 -->
+            <div class="album-card" data-category="village">
+                <div class="album-cover">
+                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="家乡风貌">
+                    <div class="album-count">30张</div>
+                </div>
+                <div class="album-info">
+                    <h3 class="album-title">家乡风貌变迁</h3>
+                    <div class="album-date">2000-2025年</div>
+                    <p class="album-desc">记录家乡陇西县权家湾镇25年来的变化，从土路瓦房到新农村建设...</p>
+                    <a href="#" class="view-album-btn" data-album="hometown">查看相册</a>
+                </div>
+            </div>
+            
+            <!-- 相册6 -->
+            <div class="album-card" data-category="reunion">
+                <div class="album-cover">
+                    <img src="https://images.unsplash.com/photo-1586773869418-4a8f210c1c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="清明祭祖">
+                    <div class="album-count">28张</div>
+                </div>
+                <div class="album-info">
+                    <h3 class="album-title">2024年清明祭祖</h3>
+                    <div class="album-date">2024年4月5日</div>
+                    <p class="album-desc">家族成员齐聚祖坟，举行隆重祭祖仪式，缅怀先人，传承孝道文化...</p>
+                    <a href="#" class="view-album-btn" data-album="tomb-sweeping">查看相册</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 上传相册区域 -->
+        <div class="upload-section">
+            <h2><i class="fas fa-cloud-upload-alt"></i> 上传家族照片</h2>
+            <div class="upload-form">
+                <div class="upload-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <p class="upload-text">将照片拖放到此处，或点击选择文件</p>
+                <input type="file" id="photo-upload" accept="image/*" multiple style="display: none;">
+                <button class="upload-btn" onclick="document.getElementById('photo-upload').click()">选择照片</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片详情弹窗 -->
+    <div id="photo-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">2025年春节大团聚</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="photo-container">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="全家福">
+                </div>
+                <div class="photo-meta">
+                    <span>拍摄日期: 2025年2月10日</span>
+                    <span>拍摄者: 权志强</span>
+                </div>
+                <div class="photo-desc">
+                    <p>2025年春节，权氏家族在陇西县权家湾镇老宅举行的全家团聚。这是疫情后的首次大团聚，共有56位家族成员参加，年龄最大的长辈权爷爷98岁，最小的成员权小宝仅3个月大。</p>
+                    <p>照片中前排就坐的是家族长辈，后排站立的是中青年一代和孩子们。拍摄于老宅院内的百年槐树下，这棵槐树见证了权家五代人的成长。</p>
+                </div>
+                <div class="photo-nav">
+                    <a href="#" class="photo-nav-btn"><i class="fas fa-arrow-left"></i> 上一张</a>
+                    <span>1/36</span>
+                    <a href="#" class="photo-nav-btn">下一张 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>权氏家族</h4>
+                <p>传承家族文化 · 凝聚亲情力量</p>
+            </div>
+            <div class="footer-section">
+                <h4>联系方式</h4>
+                <p><i class="fas fa-envelope"></i> quanshi@qq.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 甘肃省陇西县权家湾镇深沟社</p>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-qq"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 权氏家族网 | 传承不息 亲情永续</p>
+        </div>
+    </footer>
+
+    <script>
+        // 相册分类筛选功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const albumCards = document.querySelectorAll('.album-card');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // 给当前点击的按钮添加active类
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // 显示或隐藏相册卡片
+                    albumCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 图片弹窗功能
+            const viewAlbumBtns = document.querySelectorAll('.view-album-btn');
+            const modal = document.getElementById('photo-modal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            viewAlbumBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const albumId = this.getAttribute('data-album');
+                    // 这里可以加载相册数据
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // 点击模态框外部关闭
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // 上传功能
+            const photoUpload = document.getElementById('photo-upload');
+            photoUpload.addEventListener('change', function(e) {
+                if (this.files.length > 0) {
+                    alert(`已选择 ${this.files.length} 张照片，准备上传...`);
+                    // 这里可以添加实际上传逻辑
+                    console.log('选择的文件:', this.files);
+                }
+            });
+            
+            // 拖放上传功能
+            const uploadForm = document.querySelector('.upload-form');
+            
+            uploadForm.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#8e2323';
+                this.style.backgroundColor = 'rgba(142, 35, 35, 0.1)';
+            });
+            
+            uploadForm.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#ddd';
+                this.style.backgroundColor = 'transparent';
+            });
+            
+            uploadForm.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#ddd';
+                this.style.backgroundColor = 'transparent';
+                
+                if (e.dataTransfer.files.length > 0) {
+                    photoUpload.files = e.dataTransfer.files;
+                    alert(`已拖放 ${e.dataTransfer.files.length} 张照片，准备上传...`);
+                    console.log('拖放的文件:', e.dataTransfer.files);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
